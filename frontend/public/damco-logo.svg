@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 200" fill="none">
+  <!-- Globe Base -->
+  <circle cx="80" cy="100" r="50" stroke="white" stroke-width="8" />
+  
+  <!-- Globe Meridians & Parallels -->
+  <ellipse cx="80" cy="100" rx="22" ry="50" stroke="white" stroke-width="6" />
+  <line x1="80" y1="50" x2="80" y2="150" stroke="white" stroke-width="6" />
+  <line x1="30" y1="100" x2="130" y2="100" stroke="white" stroke-width="6" />
+  <line x1="42" y1="70" x2="118" y2="70" stroke="white" stroke-width="6" />
+  <line x1="42" y1="130" x2="118" y2="130" stroke="white" stroke-width="6" />
+  
+  <!-- Arrow -->
+  <!-- Ensured it's perfectly vertical (x1=x2) -->
+  <line x1="160" y1="150" x2="160" y2="40" stroke="white" stroke-width="8" />
+  <!-- Arrow head perfectly symmetrical -->
+  <polygon points="160,18 142,45 178,45" fill="white" />
+  
+  <!-- Text: DAMCO (Moved right, increased spacing) -->
+  <text x="200" y="130" font-family="Georgia, 'Times New Roman', serif" font-size="105" font-weight="bold" fill="white" letter-spacing="8">DAMCO</text>
+  
+  <!-- Subtext: Ensuring Your Success, Always. (Moved right, more spacing) -->
+  <text x="205" y="175" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="white" letter-spacing="1.5">Ensuring Your Success, Always.</text>
+</svg>

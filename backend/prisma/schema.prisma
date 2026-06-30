@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String @unique @db.VarChar(200)
+
+  @@map("categories")
+}
+
+model Employee {
+  id              Int       @id @default(autoincrement())
+  email           String    @unique @db.VarChar(255)
+  name            String    @db.VarChar(255)
+  employee_code   String?   @db.VarChar(100)
+  designation     String?   @db.VarChar(255)
+  division        String?   @db.VarChar(255)
+  joining_date    String?   @db.VarChar(50)
+  feedback_source String?   @default("Voice Box") @db.VarChar(255)
+  feedbacks       Feedback[]
+
+  @@map("employees")
+}
+
+model Feedback {
+  id              Int                   @id @default(autoincrement())
+  category        String                @db.VarChar(200)
+  text            String                @db.Text
+  is_anonymous    Boolean               @default(true)
+  employee_id     Int?
+  created_at      DateTime              @default(now())
+  employee        Employee?             @relation(fields: [employee_id], references: [id])
+  outbox_events   FmsIntegrationOutbox[]
+
+  @@map("feedback")
+}
+
+model FmsIntegrationOutbox {
+  id              Int       @id @default(autoincrement())
+  feedback_id     Int
+  status          String    @db.VarChar(50) // PENDING, PROCESSING, SYNCED, FAILED, DLQ
+  fms_ticket_id   String?   @db.VarChar(100)
+  retry_count     Int       @default(0)
+  error_message   String?   @db.Text
+  last_attempt_at DateTime?
+  created_at      DateTime  @default(now())
+  feedback        Feedback  @relation(fields: [feedback_id], references: [id], onDelete: Cascade)
+
+  @@map("fms_integration_outbox")
+}
