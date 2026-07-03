@@ -97,10 +97,10 @@ export default function App() {
 
       {/* ── Main Content ── */}
       <main className="main-content">
-        <div style={{ width: '100%', maxWidth: 680 }}>
+        <div style={{ width: '100%' }}>
           {/* Global error outside card */}
           {globalError && (
-            <div className="alert alert-error" style={{ marginBottom: 16, maxWidth: 640, margin: '0 auto 16px' }}>
+            <div className="alert alert-error" style={{ marginBottom: 16, margin: '0 auto 16px' }}>
               <span>⚠</span> {globalError}
             </div>
           )}
