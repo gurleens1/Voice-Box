@@ -14,7 +14,12 @@ startOutboxWorker();
 const app = express();
 const port = process.env.PORT || 8000;
 
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:3000'], credentials: true }));
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'];
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
