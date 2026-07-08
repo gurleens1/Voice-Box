@@ -59,7 +59,10 @@ export async function processOutbox() {
           external_ref_id: `VB-FEEDBACK-${feedback.id}`
         };
 
-        const response = await fetch(`${FMS_BASE_URL}/api/feedback`, {
+        const targetUrl = `${FMS_BASE_URL}/api/feedback`;
+        console.log(`Attempting to send feedback ${feedback.id} to: ${targetUrl}`);
+        
+        const response = await fetch(targetUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -70,6 +73,7 @@ export async function processOutbox() {
 
         if (!response.ok) {
           const errorText = await response.text();
+          console.error(`FMS Error ${response.status} at ${targetUrl}: ${errorText}`);
           throw new Error(`FMS Error ${response.status}: ${errorText}`);
         }
 
