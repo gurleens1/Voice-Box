@@ -1,6 +1,6 @@
 import { prisma } from './db';
 
-const FMS_BASE_URL = process.env.FMS_BASE_URL || 'http://localhost:3001';
+const FMS_BASE_URL = (process.env.FMS_BASE_URL || 'http://localhost:3001').replace(/\/+$/, '');
 const FMS_API_TOKEN = process.env.FMS_API_TOKEN || '';
 
 export async function processOutbox() {
